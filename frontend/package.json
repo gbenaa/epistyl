@@ -1,0 +1,10 @@
+{
+  "name": "epistyl-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "echo \"Define dev script once framework is chosen\"",
+    "build": "echo \"Define build script once framework is chosen\"",
+    "start": "echo \"Define start script once framework is chosen\""
+  }
+}

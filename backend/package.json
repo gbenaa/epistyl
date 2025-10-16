@@ -1,0 +1,10 @@
+{
+  "name": "epistyl-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js || echo \"Add server.js when backend is scaffolded\"",
+    "start": "node server.js || echo \"Add server.js when backend is scaffolded\""
+  }
+}
