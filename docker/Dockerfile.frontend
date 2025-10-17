@@ -1,0 +1,19 @@
+# ===============================================================
+# Epistyl - Dockerfile.frontend
+# Purpose -> Frontend build/run using the shared nvm base
+# ===============================================================
+
+FROM epistyl/base:latest
+
+WORKDIR /app/frontend
+
+# -> Install deps first for cache efficiency
+COPY frontend/package*.json ./
+RUN npm ci
+
+# -> Copy rest of sources
+COPY frontend/ .
+
+EXPOSE 3000
+
+CMD ["npm","run","dev"]

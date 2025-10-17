@@ -1,0 +1,30 @@
+# ===============================================================
+# Epistyl - Dockerfile.base
+# Purpose -> Shared base with nvm + Node for frontend/backend
+# ===============================================================
+
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV NVM_DIR=/usr/local/nvm
+ENV NODE_VERSION=20.12.2
+
+# -> Base packages
+RUN apt-get update && apt-get install -y \
+    curl git ca-certificates bash build-essential tini \
+ && rm -rf /var/lib/apt/lists/*
+
+# -> Install nvm and Node
+RUN mkdir -p $NVM_DIR \
+ && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \
+ && . "$NVM_DIR/nvm.sh" \
+ && nvm install $NODE_VERSION \
+ && nvm alias default $NODE_VERSION
+
+# -> Make Node available on non-login shells
+ENV PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+# -> Verify
+RUN node -v && npm -v
+
+ENTRYPOINT ["/usr/bin/tini","--"]
